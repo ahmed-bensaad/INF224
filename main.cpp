@@ -34,7 +34,7 @@ int main(int argc, char* argv[]) {
   //m[1]=0; ça marche pas (cf commentaire dans film.h)
 
   film->display(std::cout);*/
-    using FilmPtr =std::shared_ptr<Film>;
+   using FilmPtr =std::shared_ptr<Film>;
     using ImagePtr =std::shared_ptr<Image>;
 
     int * durs=new int[4];
