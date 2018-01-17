@@ -15,7 +15,7 @@ Table::Table(){
 
 }
 
-Table::Table(std::map<std::string,MultPtr> objects,std::map<std::string,Groupe> groupes){
+Table::Table(std::map<std::string,MultPtr> objects,std::map<std::string,GroupePtr> groupes){
     m_objects=objects;
     m_groupes=groupes;
 }
@@ -27,28 +27,59 @@ ImagePtr Table::createImage(std::string name,std::string path,int longitude ,int
 }
 
 VidPtr Table::createVideo(std::string name,std::string path,int duration){
-    Video video(new Video(name,path,duration));
+    VidPtr video(new Video(name,path,duration));
     m_objects[name]=video;
     return video;
 }
 
-FilmPtr Table::createFilm(std::string name, std::string path, int duration, int nbr_chapters,int* chapters_dur){
-    Film film (new(Film(name,path,duration,nbr_chapters,chapters_dur));
+FilmPtr Table::createFilm(std::string name, std::string path, int duration,int* chapters_dur, int nbr_chapters){
+    FilmPtr film (new Film(name,path,duration,chapters_dur,nbr_chapters));
     m_objects[name]=film;
     return film;
 }
 
 GroupePtr Table::createGroupe(std::string name,unsigned int argv, ...){
-    Groupe groupe (new(Groupe(name,argv,...));
+    GroupePtr groupe (new Groupe());
+    groupe->setName(name);
     m_groupes[name]=groupe;
+    va_list v1;
+    va_start(v1,argv);
+    for(unsigned int i=0;i<argv;i++){
+        auto element=va_arg(v1,MultPtr);
+        groupe->push_back(element);
+    }
+    va_end(v1);
+
     return groupe;
 }
 
-void Table::findItem(std::string name){
+void Table::findItem(std::string name,std::ostream & stream){
+    auto item=m_objects.find(name);
+    if(item!=m_objects.end()){
+       stream<<"Item found"<<std::endl;
+       (item->second)->display(stream);
+    }else{
+        auto item2=m_groupes.find(name);
+        if (item2!=m_groupes.end()){
+            stream<<"Group found"<<std::endl;
+            (item2->second)->display(stream);
+        }
+        else{
+            stream<<"Item does not exist"<<std::endl;
+
+        }
+    }
 
 }
 
-void Table::playItem(std::string name){
+void Table::playItem(std::string name,std::ostream & stream){
+    auto item=m_objects.find(name);
+    if(item!=m_objects.end()){
+       stream<<"Item found"<<std::endl;
+       (item->second)->jouer();
+    }else{
+    stream<<"Item not found"<<std::endl;
+    }
 
 }
 
