@@ -28,7 +28,7 @@ public:
     ImagePtr createImage(std::string name,std::string path,int longitude,int latitude);
     VidPtr createVideo(std::string name, std::string path, int duration);
     FilmPtr createFilm(std::string name, std::string path, int duration,int * chapter_dur, int nbr_chapter);
-    GroupePtr createGroupe(std::string name,unsigned int argv, ...);
+    GroupePtr createGroupe(std::string name,std::vector<MultPtr> list);
     void findItem(std::string name, std::ostream &stream);
     void playItem(std::string name, std::ostream &stream);
 

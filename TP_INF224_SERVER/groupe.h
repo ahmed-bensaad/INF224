@@ -4,6 +4,7 @@
 #include <stdarg.h>
 #include "multimedia.h"
 #include <list>
+#include <vector>
 #include<memory>
 using MultPtr = std::shared_ptr<Multimedia>;
 class Groupe : public std::list<MultPtr>
@@ -15,15 +16,12 @@ public:
     Groupe():std::list<MultPtr>(){
         m_name="";
     };
-    Groupe(std::string name,unsigned int argv, ...):Groupe(){
+    Groupe(std::string name,std::vector<MultPtr> list):Groupe(){
         this->m_name=name;
-        va_list v1;
-        va_start(v1,argv);
-        for(unsigned int i=0;i<argv;i++){
-            auto element=va_arg(v1,MultPtr);
+        for(unsigned int i=0;i<list.size();i++){
+            auto element=list[i];
             this->push_back(element);
         }
-        va_end(v1);
     };
    std::string getName()const{
         return this->m_name;

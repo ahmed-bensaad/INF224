@@ -52,14 +52,16 @@ int main(int argc, char* argv[]) {
     FilmPtr film2( new Film("foo1","baar1",121,durs1,4));
     ImagePtr image1(new Image("fooimage","baarimage",100,20));
     ImagePtr image2(new Image("fooimage2","baarimage2",101,21));
-
-   Groupe g1=Groupe("g1",3,film1,film2,image1);
-   Groupe g2=Groupe("g2",3,film1,image2,image1);
+    std::vector<MultPtr> list;
+    list.push_back(film1);
+    list.push_back(film2);
+   Groupe g1=Groupe("g1",list);
+   //Groupe g2=Groupe("g2",3,film1,image2,image1);
 
    std::cout<<"Groupe1"<<"\n"<<std::endl;
    g1.display(std::cout);
-   std::cout<<"Groupe2"<<"\n"<<std::endl;
-   g2.display(std::cout);
+   //std::cout<<"Groupe2"<<"\n"<<std::endl;
+   //g2.display(std::cout);
 
 
 

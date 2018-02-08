@@ -38,18 +38,8 @@ FilmPtr Table::createFilm(std::string name, std::string path, int duration,int* 
     return film;
 }
 
-GroupePtr Table::createGroupe(std::string name,unsigned int argv, ...){
-    GroupePtr groupe (new Groupe());
-    groupe->setName(name);
-    m_groupes[name]=groupe;
-    va_list v1;
-    va_start(v1,argv);
-    for(unsigned int i=0;i<argv;i++){
-        auto element=va_arg(v1,MultPtr);
-        groupe->push_back(element);
-    }
-    va_end(v1);
-
+GroupePtr Table::createGroupe(std::string name,std::vector<MultPtr> list){
+    GroupePtr groupe (new Groupe(name,list));
     return groupe;
 }
 
