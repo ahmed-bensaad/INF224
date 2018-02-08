@@ -40,9 +40,29 @@ FilmPtr Table::createFilm(std::string name, std::string path, int duration,int* 
 
 GroupePtr Table::createGroupe(std::string name,std::vector<MultPtr> list){
     GroupePtr groupe (new Groupe(name,list));
+    m_groupes[name]=groupe;
     return groupe;
 }
-
+void Table::deleteGroupe(std::string name,std::string & response){
+    auto item=m_objects.find(name);
+    if(item!=m_objects.end()){
+    m_groupes.erase(name);
+    }else{
+        response="Error: Item not found !";
+    }
+}
+void Table::deleteMult(std::string name,std::string & response){
+    auto item=m_objects.find(name);
+    if(item!=m_objects.end()){
+    m_objects.erase(name);
+    }else{
+        response="Error: Item not found !";
+    }
+}
+void Table::addObjectToGroup(std::string object_name,std::string group_name,std::ostream & stream){
+    m_groupes[group_name]->push_back(m_objects[object_name]);
+    stream<<"Group updated"<<std::endl;
+}
 void Table::findItem(std::string name,std::ostream & stream){
     auto item=m_objects.find(name);
     if(item!=m_objects.end()){

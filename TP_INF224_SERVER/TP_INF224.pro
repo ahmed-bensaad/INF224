@@ -9,12 +9,19 @@ HEADERS = \
    $$PWD/image.h \
    $$PWD/multimedia.h \
    $$PWD/video.h \
-    table.h
+    table.h \
+    video.h \
+    tcpserver.h \
+    cppsocket.h
 
 SOURCES = \
    $$PWD/main.cpp \
    $$PWD/multimedia.cpp \
-    table.cpp
+    table.cpp \
+    server.cpp \
+    tcpserver.cpp \
+    cppsocket.cpp \
+    client.cpp
 
 INCLUDEPATH = \
     $$PWD/.

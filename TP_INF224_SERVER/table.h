@@ -31,6 +31,11 @@ public:
     GroupePtr createGroupe(std::string name,std::vector<MultPtr> list);
     void findItem(std::string name, std::ostream &stream);
     void playItem(std::string name, std::ostream &stream);
+    void deleteMult(std::string name,std::string & response);
+    void deleteGroupe(std::string name,std::string & response);
+    void addObjectToGroup(std::string object_name,std::string group_name,std::ostream & stream);
+    std::map<std::string,MultPtr> getObjects()const{return m_objects;};
+    std::map<std::string,GroupePtr> getGroupes()const{return m_groupes;};
 
 
 };

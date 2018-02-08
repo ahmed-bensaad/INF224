@@ -1,6 +1,7 @@
 //
 //  main.cpp
 //  
+#ifdef VERSION_TRUC
 
 #include <iostream>
 #include "multimedia.h"
@@ -67,3 +68,4 @@ int main(int argc, char* argv[]) {
 
 
 }
+#endif

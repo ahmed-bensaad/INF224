@@ -31,9 +31,13 @@ public:
        this->m_name=name;
    };
    void display(std::ostream & stream){
+       unsigned int i =1;
        for (std::list<MultPtr>::iterator it=this->begin(); it != this->end(); ++it)
        {
+         stream<< "Item"<<" "<<i<<"\n"<<std::endl;
          (*it)->display(stream);
+         stream<<"\n"<<std::endl;
+         i++;
        }
    };
 

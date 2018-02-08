@@ -10,16 +10,19 @@
 # Nom du programme
 #
 PROG = myprog
+CLIENT=client
 
 #
 # Fichiers sources (NE PAS METTRE les .h ni les .o seulement les .cpp)
 #
-SOURCES = multimedia.cpp main.cpp table.cpp
+SOURCES = multimedia.cpp server.cpp table.cpp tcpserver.cpp cppsocket.cpp 
+CLIENT_SOURCES = client.cpp cppsocket.cpp 
 
 #
 # Fichiers objets (ne pas modifier sauf si l'extension n'est pas .cpp)
 #
 OBJETS = ${SOURCES:%.cpp=%.o}
+CLIENT_OBJETS=${CLIENT_SOURCES:%.cpp=%.o}
 
 #
 # Compilateur C++
@@ -43,7 +46,7 @@ LDFLAGS =
 # Librairies a utiliser
 # Exemple: LDLIBS = -L/usr/local/qt/lib -lqt
 #
-LDLIBS = 
+LDLIBS = -lpthread
 
 
 ##########################################
@@ -52,19 +55,22 @@ LDLIBS =
 # depend-${PROG} sera un fichier contenant les dependances
 #
  
-all: ${PROG}
+all: ${PROG} ${CLIENT}
 
-run: ${PROG}
+run: ${PROG} ${CLIENT}
 	./${PROG}
 
 ${PROG}: depend-${PROG} ${OBJETS}
 	${CXX} -o $@ ${CXXFLAGS} ${LDFLAGS} ${OBJETS} ${LDLIBS}
 
+${CLIENT}: depend-${CLIENT} ${CLIENT_OBJETS}
+	${CXX} -o $@ ${CXXFLAGS} ${LDFLAGS} ${CLIENT_OBJETS} ${LDLIBS}
+
 clean:
-	-@$(RM) *.o depend-${PROG} core 1>/dev/null 2>&1
+	-@$(RM) *.o depend-${PROG} depend-${CLIENT} core 1>/dev/null 2>&1
 
 clean-all: clean
-	-@$(RM) ${PROG} 1>/dev/null 2>&1
+	-@$(RM) -${CLIENT} ${PROG} 1>/dev/null 2>&1
   
 tar:
 	tar cvf ${PROG}.tar.gz ${SOURCES}
@@ -74,6 +80,9 @@ tar:
 #
 depend-${PROG}:
 	${CXX} ${CXXFLAGS} -MM ${SOURCES} > depend-${PROG}
+	
+depend-${CLIENT}:
+	${CXX} ${CXXFLAGS} -MM ${CLIENT_SOURCES} > depend-${CLIENT}
 
 
 ###########################################
@@ -98,3 +107,4 @@ depend-${PROG}:
 # Inclusion du fichier des dependances
 #
 -include depend-${PROG}
+-include depend-${CLIENT}
