@@ -67,13 +67,13 @@ ${CLIENT}: depend-${CLIENT} ${CLIENT_OBJETS}
 	${CXX} -o $@ ${CXXFLAGS} ${LDFLAGS} ${CLIENT_OBJETS} ${LDLIBS}
 
 clean:
-	-@$(RM) *.o depend-${PROG} depend-${CLIENT} core 1>/dev/null 2>&1
+	-@$(RM) *.o depend-${PROG} depend-${CLIENT} myprog client core 1>/dev/null 2>&1
 
 clean-all: clean
 	-@$(RM) -${CLIENT} ${PROG} 1>/dev/null 2>&1
   
 tar:
-	tar cvf ${PROG}.tar.gz ${SOURCES}
+	tar cvf -${CLIENT} ${PROG}.tar.gz ${SOURCES}
 
 # Gestion des dependances : creation automatique des dependances en utilisant 
 # l'option -MM de g++ (attention tous les compilateurs n'ont pas cette option)
