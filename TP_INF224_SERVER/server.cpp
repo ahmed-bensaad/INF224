@@ -133,8 +133,9 @@ public:
         stream>>fileType>>fileName;
         if (fileType=="group"){
             table->deleteGroupe(fileName,response);
-        }else if((fileType=="Image")||(fileType=="Video")||(fileType=="Film")){
+        }else if((fileType=="image")||(fileType=="video")||(fileType=="film")){
             table->deleteMult(fileName,response);
+            response="File successfully deleted"
         }else{
             response="Error: File type not defined !";
         }
