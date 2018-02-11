@@ -1,3 +1,23 @@
+//
+//Film Class
+//inherits from Video
+//
+//
+
+/*! \mainpage TP INF 224
+ *
+ * \section intro_sec Introduction
+ *
+ * TP client serveur réalisé par Ahmed Ben Saad
+ *
+ * \section install_sec Installation
+ *
+ * \subsection step1 Step 1: Go to the server folder and run IN A TERMINAL make run.
+ * \subsection step2 Step 2: Go to the GUI folder and run make run.
+ * \subsection step3 Step 3: Enjoy :)
+
+ */
+
 #ifndef FILM_H
 #define FILM_H
 #include "video.h"
@@ -28,6 +48,10 @@ public:
     const int * getChaptersDur()const{
         return this->chapters_dur; //Le const avant la declaration signifie que l'objet renvoyé ne peut pas être modifié
     }
+
+    /// @brief Displays the film.
+    /// @param stream the stream.
+
     void display(std::ostream& stream) const override {
         Video::display(stream);
         int nbr= getNbrChapters();

@@ -1,0 +1,5 @@
+<map id="Multimedia" name="Multimedia">
+<area shape="rect" id="node2" href="$class_image.html" title="Image" alt="" coords="5,80,64,107"/>
+<area shape="rect" id="node3" href="$class_video.html" title="Video" alt="" coords="89,80,143,107"/>
+<area shape="rect" id="node4" href="$class_film.html" title="Film" alt="" coords="93,155,139,181"/>
+</map>
